@@ -1,0 +1,25 @@
+@import "utils/mixins";
+@import "utils/variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: var(--fz-md);
+  line-height: 1.5;
+  background-color: $color-background;
+}
+
+.container {
+    width: 150rem;
+    @media screen {
+        
+    }
+}
