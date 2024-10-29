@@ -26,4 +26,5 @@ A simple To-Do List application built with HTML, CSS, and JavaScript, offering f
 
 1. Clone the repository:
    ```bash
+   
    git clone https://github.com/aliyara290/to-do-list.git
