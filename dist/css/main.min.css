@@ -1,1 +1,1 @@
-*{margin:0;padding:0;box-sizing:border-box}html{font-size:10px}body{font-size:var(--fz-md);line-height:1.5;background-color:#f4f6f8}.container{width:150rem}/*# sourceMappingURL=main.min.css.map */
+html{font-size:10px}*{margin:0;padding:0;box-sizing:border-box}body{font-size:var(--fz-md)}header{width:100%;height:8rem;background-color:#080909;padding:0 4%}header img{width:20rem}/*# sourceMappingURL=main.min.css.map */

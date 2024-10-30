@@ -7,19 +7,16 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 10px;
-}
-
 body {
   font-size: var(--fz-md);
-  line-height: 1.5;
-  background-color: $color-background;
 }
 
-.container {
-    width: 150rem;
-    @media screen {
-        
-    }
+header {
+  width: 100%;
+  height: 8rem;
+  background-color: $color-background;
+  padding: 0 4%;
+  img {
+    width: 20rem;
+  }
 }
