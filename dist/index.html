@@ -21,9 +21,10 @@
     />
   </head>
   <body>
-    <heaedr class="header">
+    <div class="toggle__effect"></div>
+    <heaedr class="header_content">
       <div class="header__logo">
-        <!-- <img src="../src/assets/images/logo/logo.png" alt="logo" /> -->
+        <img src="../src/assets/images/logo/Untitled-1.svg" alt="logo" />
       </div>
       <div class="header__btns">
         <ul class="header__btn-list">
@@ -36,22 +37,29 @@
         </ul>
       </div>
     </heaedr>
-    <main class="main_content">
+    <main
+      class="main_content"
+      style="
+        background: url('../src/assets/images/bgs/bg-4.jpg');
+        background-position: bottom;
+        background-size: cover;
+      "
+    >
       <section class="tasks">
         <div class="task__row">
           <div class="task__row_new">
             <button type="button" id="new__task">Add Task</button>
-            <div class="task__modal">
+            <div class="task__modal" id="add__task-model--eff">
               <header class="modal__header">
                 <div class="modal__header-heading">
                   <h2>Add Task</h2>
                 </div>
-                <div class="modal__header-close">
+                <div class="modal__header-close" id="close__modal-btn">
                   <i class="fa-solid fa-xmark"></i>
                 </div>
               </header>
               <div class="task__modal-details">
-                <form action="">
+                <form action="" id="modal__form">
                   <div class="modal__details-title">
                     <label for="add__title">Add title</label>
                     <textarea
@@ -59,9 +67,217 @@
                       id="add__title"
                       placeholder="Add title"
                       required
+                      class="modal___inputs"
                     ></textarea>
                   </div>
                   <div class="modal__details-priority">
+                    <div class="priority__modal-title">
+                      <label>Periority</label>
+                    </div>
+                    <div class="modal__radios">
+                      <div class="details_periority-item">
+                        <input
+                          type="radio"
+                          name="add__priority"
+                          id="add__priority-high"
+                          value="high"
+                          required
+                        />
+                        <label for="add__priority-high">High</label>
+                      </div>
+                      <div class="details_periority-item">
+                        <input
+                          type="radio"
+                          name="add__priority"
+                          id="add__priority-md"
+                          value="medium"
+                        />
+                        <label for="add__priority-md">Medium</label>
+                      </div>
+                      <div class="details_periority-item">
+                        <input
+                          type="radio"
+                          name="add__priority"
+                          id="add__priority-low"
+                          value="low"
+                        />
+                        <label for="add__priority-low">Low</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal__details-status">
+                    <label for="add__status">Status</label>
+                    <select class="modal___inputs" name="add__status" id="add__status">
+                      <option value="bug" disabled selected>Please select</option>
+                      <option value="bug">Bug</option>
+                      <option value="feature">Feature</option>
+                    </select>
+                  </div>
+                  <div class="modal__details-date">
+                    <label for="add__date">Date</label>
+                    <input
+                      type="date"
+                      name="add__date"
+                      id="add__date"
+                      required
+                      class="modal___inputs"
+                    />
+                  </div>
+                  <div class="modal__details-description">
+                    <label for="add__description">Desicription</label>
+                    <textarea
+                      name="add__description"
+                      id="add__description"
+                      placeholder="Add description"
+                      required
+                      class="modal___inputs"
+                    ></textarea>
+                  </div>
+                  <div class="modal__details-bottom">
+                    <div class="modal__details-btn">
+                      <button type="submit">Save Changes</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="task__row task__grid">
+          <div class="task__row-col">
+            <div class="row__col-heading">
+              <h2>To do (<span id="todo__length">0</span>)</h2>
+            </div>
+            <div class="row__col-cards">
+              <div class="col__card-message">
+                <p>No tasks added</p>
+              </div>
+               <!-- <div class="col-cards-card">
+                <div class="col__card-title">
+                  <div class="col__card-priority"></div>
+                  <h3>Setup the Environment</h3>
+                </div>
+                <div class="col__card-edit">
+                  <i class="fa-solid fa-pen"></i>
+                </div>
+              </div>
+              <div class="col-cards-card">
+                <div class="col__card-title">
+                  <div class="col__card-priority"></div>
+                  <h3>Setup the Environment</h3>
+                </div>
+                <div class="col__card-edit">
+                  <i class="fa-solid fa-pen"></i>
+                </div>
+              </div>
+              <div class="col-cards-card">
+                <div class="col__card-title">
+                  <div class="col__card-priority"></div>
+                  <h3>Setup the Environment</h3>
+                </div>
+                <div class="col__card-edit">
+                  <i class="fa-solid fa-pen"></i>
+                </div>
+              </div>  -->
+            </div>
+          </div>
+          <div class="task__row-col">
+            <div class="row__col-heading">
+              <h2>Going (<span id="going__length">5</span>)</h2>
+            </div>
+            <div class="row__col-cards">
+              <div class="col__card-message">
+                <p>No tasks added</p>
+              </div>
+              <!-- <div class="col-cards-card">
+                <div class="col__card-title">
+                  <div class="col__card-priority"></div>
+                  <h3>Setup the Environment</h3>
+                </div>
+                <div class="col__card-edit">
+                  <i class="fa-solid fa-pen"></i>
+                </div>
+              </div>
+              <div class="col-cards-card">
+                <div class="col__card-title">
+                  <div class="col__card-priority"></div>
+                  <h3>Setup the Environment</h3>
+                </div>
+                <div class="col__card-edit">
+                  <i class="fa-solid fa-pen"></i>
+                </div>
+              </div>
+              <div class="col-cards-card">
+                <div class="col__card-title">
+                  <div class="col__card-priority"></div>
+                  <h3>Setup the Environment</h3>
+                </div>
+                <div class="col__card-edit">
+                  <i class="fa-solid fa-pen"></i>
+                </div>
+              </div> -->
+            </div>
+          </div>
+          <div class="task__row-col">
+            <div class="row__col-heading">
+              <h2>Done (<span id="done__length">5</span>)</h2>
+            </div>
+            <div class="row__col-cards">
+              <div class="col__card-message">
+                <p>No tasks added</p>
+              </div>
+              <!-- <div class="col-cards-card">
+                <div class="col__card-title">
+                  <div class="col__card-priority"></div>
+                  <h3>Setup the Environment</h3>
+                </div>
+                <div class="col__card-edit">
+                  <i class="fa-solid fa-pen"></i>
+                </div>
+              </div>
+              <div class="col-cards-card">
+                <div class="col__card-title">
+                  <div class="col__card-priority"></div>
+                  <h3>Setup the Environment</h3>
+                </div>
+                <div class="col__card-edit">
+                  <i class="fa-solid fa-pen"></i>
+                </div>
+              </div>
+              <div class="col-cards-card">
+                <div class="col__card-title">
+                  <div class="col__card-priority"></div>
+                  <h3>Setup the Environment</h3>
+                </div>
+                <div class="col__card-edit">
+                  <i class="fa-solid fa-pen"></i>
+                </div>
+              </div> -->
+            </div>
+          </div>
+
+          <!-- this is edit task modal  -->
+
+          <div class="task__modal task__modal-fedit" id="edit__task-model--eff">
+            <header class="modal__header">
+              <div class="modal__header-heading">
+                <h2>edit Task</h2>
+              </div>
+              <div class="modal__header-close">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+            </header>
+            <div class="task__modal-details">
+              <form action="">
+                <div class="modal__details-title">
+                  <label for="edit__title">Add title</label>
+                  <textarea class="modal___inputs" placeholder="Add title" name="edit__title" id="edit__title"></textarea>
+                </div>
+                <div class="modal__details-priority">
+                  <div class="priority__modal-title">
+                    <label>Periority</label>
+                  </div>
+                  <div class="modal__radios">
                     <div class="details_periority-item">
                       <input
                         type="radio"
@@ -91,192 +307,18 @@
                       <label for="add__priority-low">Low</label>
                     </div>
                   </div>
-                  <div class="modal__details-date">
-                    <label for="add__date">Date</label>
-                    <input
-                      type="date"
-                      name="add__date"
-                      id="add__date"
-                      required
-                    />
-                  </div>
-                  <div class="modal__details-description">
-                    <label for="add__description">Desicription</label>
-                    <textarea
-                      name="add__description"
-                      id="add__description"
-                      placeholder="Add description"
-                      required
-                    ></textarea>
-                  </div>
-                  <div class="modal__details-btn">
-                    <button type="submit">Save</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="task__row">
-          <div class="task__row-col">
-            <div class="row__col-heading">
-              <h2>To do</h2>
-            </div>
-            <div class="row__col-cards">
-              <div class="col-cards-card">
-                <div class="col__card-priority"></div>
-                <div class="col__card-title">
-                  <h3></h3>
                 </div>
-                <div class="col__card-edit">
-                  <i class="fa-solid fa-pen"></i>
-                </div>
-              </div>
-              <div class="col-cards-card">
-                <div class="col__card-priority"></div>
-                <div class="col__card-title">
-                  <h3></h3>
-                </div>
-                <div class="col__card-edit">
-                  <i class="fa-solid fa-pen"></i>
-                </div>
-              </div>
-              <div class="col-cards-card">
-                <div class="col__card-priority"></div>
-                <div class="col__card-title">
-                  <h3></h3>
-                </div>
-                <div class="col__card-edit">
-                  <i class="fa-solid fa-pen"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="task__row-col">
-            <div class="row__col-heading">
-              <h2>Going</h2>
-            </div>
-            <div class="row__col-cards">
-              <div class="col-cards-card">
-                <div class="col__card-priority"></div>
-                <div class="col__card-title">
-                  <h3></h3>
-                </div>
-                <div class="col__card-edit">
-                  <i class="fa-solid fa-pen"></i>
-                </div>
-              </div>
-              <div class="col-cards-card">
-                <div class="col__card-priority"></div>
-                <div class="col__card-title">
-                  <h3></h3>
-                </div>
-                <div class="col__card-edit">
-                  <i class="fa-solid fa-pen"></i>
-                </div>
-              </div>
-              <div class="col-cards-card">
-                <div class="col__card-priority"></div>
-                <div class="col__card-title">
-                  <h3></h3>
-                </div>
-                <div class="col__card-edit">
-                  <i class="fa-solid fa-pen"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="task__row-col">
-            <div class="row__col-heading">
-              <h2>Done</h2>
-            </div>
-            <div class="row__col-cards">
-              <div class="col-cards-card">
-                <div class="col__card-priority"></div>
-                <div class="col__card-title">
-                  <h3></h3>
-                </div>
-                <div class="col__card-edit">
-                  <i class="fa-solid fa-pen"></i>
-                </div>
-              </div>
-              <div class="col-cards-card">
-                <div class="col__card-priority"></div>
-                <div class="col__card-title">
-                  <h3></h3>
-                </div>
-                <div class="col__card-edit">
-                  <i class="fa-solid fa-pen"></i>
-                </div>
-              </div>
-              <div class="col-cards-card">
-                <div class="col__card-priority"></div>
-                <div class="col__card-title">
-                  <h3></h3>
-                </div>
-                <div class="col__card-edit">
-                  <i class="fa-solid fa-pen"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- this is edit task modal  -->
-
-          <div class="task__modal">
-            <header class="modal__header">
-              <div class="modal__header-heading">
-                <h2>edit Task</h2>
-              </div>
-              <div class="modal__header-close">
-                <i class="fa-solid fa-xmark"></i>
-              </div>
-            </header>
-            <div class="task__modal-details">
-              <form action="">
-                <div class="modal__details-title">
-                  <label for="edit__title">Add title</label>
-                  <textarea
-                    name="edit__title"
-                    id="edit__title"
-                  ></textarea>
-                </div>
-                <div class="modal__details-priority">
-                  <div class="details_periority-item">
-                    <input
-                      type="radio"
-                      name="edit__priority"
-                      id="edit__priority-high"
-                      value="high"
-                    />
-                    <label for="edit__priority-high">High</label>
-                  </div>
-                  <div class="details_periority-item">
-                    <input
-                      type="radio"
-                      name="edit__priority"
-                      id="edit__priority-md"
-                      value="medium"
-                    />
-                    <label for="edit__priority-md">Medium</label>
-                  </div>
-                  <div class="details_periority-item">
-                    <input
-                      type="radio"
-                      name="edit__priority"
-                      id="edit__priority-low"
-                      value="low"
-                    />
-                    <label for="edit__priority-low">Low</label>
-                  </div>
+                <div class="modal__details-status">
+                  <label for="edit__status">Status</label>
+                  <select class="modal___inputs" name="edit__status" id="edit__status">
+                    <option value="bug" disabled selected>Please select</option>
+                    <option value="bug">Bug</option>
+                    <option value="feature">Feature</option>
+                  </select>
                 </div>
                 <div class="modal__details-date">
                   <label for="edit__date">Date</label>
-                  <input
-                    type="date"
-                    name="edit__date"
-                    id="edit__date"
-                  />
+                  <input class="modal___inputs" type="date" name="edit__date" id="edit__date" />
                 </div>
                 <div class="modal__details-description">
                   <label for="edit__description">Desicription</label>
@@ -284,19 +326,20 @@
                     name="edit__description"
                     id="edit__description"
                     placeholder="Add description"
+                    class="modal___inputs"
                   ></textarea>
                 </div>
                 <div class="modal__details-bottom">
-                    <div class="modal__details-btn">
-                      <button type="submit">Save Changes</button>
-                    </div>
-                    <div class="modal__details-btn">
-                      <button type="button">Delete</button>
-                    </div>
+                  <div class="modal__details-btn">
+                    <button type="button">Delete</button>
+                  </div>
+                  <div class="modal__details-btn">
+                    <button type="submit">Save Changes</button>
+                  </div>
                 </div>
               </form>
             </div>
-        </div>
+          </div>
         </div>
       </section>
     </main>

@@ -3,14 +3,18 @@
 html {
     font-size: 10px;
   }
+  textarea {
+    resize: none;
+  }
 // Primary Colors
 $color-background: #080909;
 $color-primary: #101214;
 $color-secondary: #1d2125;
+$color-transparent: #101214be;
 
 // Text Colors
 $color-text-primary: #fff;
-$color-text-placeholder: #b6c2cf;
+$color-text-placeholder: #B6C2CF;
 
 // Status Colors
 $color-high: #1569f1;
@@ -21,8 +25,37 @@ $color-danger: #f11515;
 $fz-xxs: 0.8rem;
 $fz-xs: 1rem;
 $fz-sm: 1.2rem;
-$fz-md: 1.6rem;
+$fz-md: 1.5rem;
 $fz-lg: 2rem;
 $fz-xl: 2.4rem;
 $fz-xxl: 3.2rem;
 $fz-xxxl: 4.8rem;
+
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    background-image: none;
+    padding: 12px;
+    cursor: pointer;
+}
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: none;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--navy);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+}
+::-webkit-scrollbar-track-piece {
+  border: none;
+}
