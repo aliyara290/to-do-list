@@ -32,30 +32,3 @@ $fz-xxl: 3.2rem;
 $fz-xxxl: 4.8rem;
 
 
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: transparent;
-    background-image: none;
-    padding: 12px;
-    cursor: pointer;
-}
-::-webkit-scrollbar {
-  width: 3px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-  box-shadow: none;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--navy);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #fff;
-}
-::-webkit-scrollbar-track-piece {
-  border: none;
-}
