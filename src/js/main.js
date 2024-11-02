@@ -24,20 +24,30 @@ document.addEventListener("DOMContentLoaded", () => {
   let tasksList = [];
   let taskToEdit = null;
 
+  function saveData() {
+    localStorage.setItem("tasks", JSON.stringify(tasksList));
+  }
+  function getData() {
+    const storedTasks = localStorage.getItem("tasks");
+    if (storedTasks) {
+      tasksList = JSON.parse(storedTasks);
+      renderTasks(); // Render tasks after loading from local storage
+    }
+  }
+
+  getData();
+
+
   const form = document.querySelector("#modal__form");
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const taskTitle = document.querySelector("#add__title").value.trim();
-    const taskPeriority = document.querySelector(
-      "input[name='add__priority']:checked"
-    ).value;
+    const taskPeriority = document.querySelector("input[name='add__priority']:checked").value;
     const taskStatus = document.querySelector("#add__status").value;
     const taskState = document.querySelector("#add__state").value;
     const taskDate = document.querySelector("#add__date").value;
-    const taskDecription = document
-      .querySelector("#add__description")
-      .value.trim();
+    const taskDecription = document.querySelector("#add__description").value.trim();
 
     const newTask = {
       id: Date.now().toString(),
@@ -51,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tasksList.push(newTask);
     renderTasks();
     form.reset();
-
+    saveData()
     addTaskModal.classList.remove("active");
     toggleEffect.classList.remove("active");
   });
@@ -61,23 +71,19 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     if (taskToEdit) {
-      taskToEdit.taskTitle = document
-        .querySelector("#edit__title")
-        .value.trim();
-      taskToEdit.taskPeriority = document.querySelector(
-        "input[name='edit__priority']:checked"
-      ).value;
+      taskToEdit.taskTitle = document.querySelector("#edit__title").value.trim();
+      taskToEdit.taskPeriority = document.querySelector("input[name='edit__priority']:checked").value;
       taskToEdit.taskStatus = document.querySelector("#edit__status").value;
       taskToEdit.taskState = document.querySelector("#edit__state").value;
       taskToEdit.taskDate = document.querySelector("#edit__date").value;
-      taskToEdit.taskDecription = document
-        .querySelector("#edit__description")
-        .value.trim();
+      taskToEdit.taskDecription = document.querySelector("#edit__description").value.trim();
 
       renderTasks();
 
       editTaskModal.classList.remove("active");
       toggleEffect.classList.remove("active");
+
+      saveData()
     }
   });
 
@@ -85,30 +91,46 @@ document.addEventListener("DOMContentLoaded", () => {
     taskToEdit = tasksList.find((task) => task.id === taskId);
 
     if (taskToEdit) {
-      console.log("Editing task:", taskToEdit);
-
       document.querySelector("#edit__title").value = taskToEdit.taskTitle;
-      document.querySelector(
-        "input[name='edit__priority'][value='" + taskToEdit.taskPeriority + "']"
-      ).checked = true; // Update to check the correct radio button
+      document.querySelector("input[name='edit__priority'][value='" + taskToEdit.taskPeriority + "']").checked = true;
       document.querySelector("#edit__status").value = taskToEdit.taskStatus;
       document.querySelector("#edit__state").value = taskToEdit.taskState;
       document.querySelector("#edit__date").value = taskToEdit.taskDate;
-      document.querySelector("#edit__description").value =
-        taskToEdit.taskDecription;
+      document.querySelector("#edit__description").value = taskToEdit.taskDecription;
 
       editTaskModal.classList.add("active");
       toggleEffect.classList.add("active");
+
+      saveData()
     } else {
       console.log("No task found:", taskId);
     }
   }
 
+  function deleteTask(taskId) {
+    const taskIndex = tasksList.findIndex(task => task.id === taskId);
+    if (taskIndex !== -1) {
+      tasksList.splice(taskIndex, 1);
+      renderTasks();
+      editTaskModal.classList.remove("active");
+      toggleEffect.classList.remove("active");
+      console.log(`Deleted task with ID: ${taskId}`);
+    } else {
+      console.log("Task not found:", taskId);
+    }
+  }
+
+  // Event listener for the delete button in the edit modal
+  document.getElementById("delete__task-btn").addEventListener("click", () => {
+    if (taskToEdit) {
+      deleteTask(taskToEdit.id);
+    }
+  });
+
   function renderTasks() {
     const todoTasksList = document.getElementById("todo__cards-list");
     const goingTasksList = document.getElementById("going__cards-list");
     const doneTasksList = document.getElementById("done__cards-list");
-
     todoTasksList.innerHTML = "";
     goingTasksList.innerHTML = "";
     doneTasksList.innerHTML = "";
@@ -146,6 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `;
 
+        
       switch (task.taskState) {
         case "todo":
           todoTasksList.appendChild(taskItem);
@@ -177,10 +200,4 @@ document.addEventListener("DOMContentLoaded", () => {
       taskItem.addEventListener("click", () => editTask(task.id));
     });
   }
-
-  const today = new Date().toISOString().split("T")[0];
-  let dateInput = document.querySelectorAll("input[type='date']");
-  dateInput.forEach((input) => {
-    input.value = today;
-  });
 });
