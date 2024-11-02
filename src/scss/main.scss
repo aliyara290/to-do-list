@@ -121,24 +121,30 @@ body {
 .task__modal {
   max-width: 50rem;
   width: 50rem;
+  max-height: 90vh;
+  overflow-y: auto;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: $color-primary;
   padding: 2rem;
+  padding-top: 0;
   border-radius: 1.5rem;
   color: $color-text-placeholder;
   z-index: 1000;
   box-shadow: 0 0 2rem 1rem #101214a7;
   border: 0.5px solid #2a2c2ea6;
   .modal__header {
+    position: sticky;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 2rem;
     border-bottom: 1px solid #b6c2cf39;
-
+    background-color: $color-primary;
+    padding-top: 2rem;
     .modal__header-heading h2 {
       font-size: $fz-lg;
       font-weight: 500;
@@ -266,7 +272,7 @@ body {
 .task__grid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(29rem, 1fr));
   align-items: start;
   gap: 4rem;
   .task__row-col {
@@ -287,8 +293,10 @@ body {
   }
   .row__col-cards {
     width: 100%;
+    max-height: 30rem;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
     gap: 2rem;
     .col__card-message {
       display: flex;
@@ -309,10 +317,9 @@ body {
       flex-direction: column;
       gap: 1.5rem;
       cursor: pointer;
-      overflow: hidden;
       &:hover {
         background-color: #1a1d20;
-        .col__card-edit i {
+        .colm__card--top .col__card-edit i {
           visibility: unset;
           transform: rotate(365deg);
         }
@@ -320,15 +327,18 @@ body {
       .colm__card--top {
         display: grid;
         grid-template-columns: repeat(10, 1fr);
+        gap: 1rem;
         .col__card-title {
           grid-column: span 9 / span 9;
           display: flex;
           align-items: center;
+          overflow: hidden;
           h3 {
             font-size: $fz-md;
-            font-weight: 500;
+            font-weight: 600;
             color: $color-text-placeholder;
             line-height: 1;
+            text-overflow: ellipsis;
           }
         }
         .col__card-edit {
@@ -343,6 +353,8 @@ body {
         }
       }
       .colm__card--middle {
+        overflow: hidden;
+
         p {
           font-size: $fz-sm;
           color: $color-text-placeholder;
@@ -363,7 +375,7 @@ body {
             span {
               font-size: $fz-sm;
               font-weight: 500;
-              color: $color-primary;
+              text-shadow: 0 0 20px 2px #000000c1;
             }
           }
           .col__card-status {
@@ -382,11 +394,9 @@ body {
           p {
             font-size: $fz-sm;
             color: $color-text-placeholder;
-
           }
         }
       }
-      
     }
   }
 }

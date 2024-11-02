@@ -122,6 +122,15 @@
                       <option value="Feature">Feature</option>
                     </select>
                   </div>
+                  <div class="modal__details-status">
+                    <label for="add__status">State</label>
+                    <select class="modal___inputs" name="add__state" id="add__state">
+                      <option disabled selected>Please select</option>
+                      <option value="todo">To Do</option>
+                      <option value="going">Going</option>
+                      <option value="done">Done</option>
+                    </select>
+                  </div>
                   <div class="modal__details-date">
                     <label for="add__date">Date</label>
                     <input
@@ -155,9 +164,9 @@
         <div class="task__row task__grid">
           <div class="task__row-col">
             <div class="row__col-heading">
-              <h2>To do (<span id="todo__length">0</span>)</h2>
+              <h2>To do</h2>
             </div>
-            <div class="row__col-cards">
+            <div class="row__col-cards" id="todo__cards-list">
               <div class="col__card-message">
                 <p>No tasks added</p>
               </div>
@@ -165,9 +174,9 @@
           </div>
           <div class="task__row-col">
             <div class="row__col-heading">
-              <h2>Going (<span id="going__length">0</span>)</h2>
+              <h2>Going</h2>
             </div>
-            <div class="row__col-cards">
+            <div class="row__col-cards" id="going__cards-list">
               <div class="col__card-message">
                 <p>No tasks added</p>
               </div>
@@ -175,9 +184,9 @@
           </div>
           <div class="task__row-col">
             <div class="row__col-heading">
-              <h2>Done (<span id="done__length">0</span>)</h2>
+              <h2>Done</h2>
             </div>
-            <div class="row__col-cards">
+            <div class="row__col-cards" id="done__cards-list">
               <div class="col__card-message">
                 <p>No tasks added</p>
               </div>
@@ -191,57 +200,75 @@
               <div class="modal__header-heading">
                 <h2>edit Task</h2>
               </div>
-              <div class="modal__header-close">
+              <div class="modal__header-close" id="close__edit-modal">
                 <i class="fa-solid fa-xmark"></i>
               </div>
             </header>
             <div class="task__modal-details">
-              <form action="">
+              <form action="" id="edit__modal-form">
                 <div class="modal__details-title">
                   <label for="edit__title">Add title</label>
                   <textarea class="modal___inputs" placeholder="Add title" name="edit__title" id="edit__title"></textarea>
                 </div>
                 <div class="modal__details-priority">
                   <div class="priority__modal-title">
-                    <label>Periority</label>
+                    <label>Priority</label>
                   </div>
                   <div class="modal__radios">
                     <div class="details_periority-item">
-                      <input
-                        type="radio"
-                        name="add__priority"
-                        id="add__priority-high"
-                        value="high"
-                        required
-                      />
-                      <label for="add__priority-high">High</label>
+                      <label class="periority__item-label">
+                        <input
+                          type="radio"
+                          name="edit__priority"
+                          id="edit__priority-high"
+                          value="High"
+                        />
+                        <span class="custom__radio"></span>
+                        High
+                      </label>
                     </div>
                     <div class="details_periority-item">
-                      <input
-                        type="radio"
-                        name="add__priority"
-                        id="add__priority-md"
-                        value="medium"
-                      />
-                      <label for="add__priority-md">Medium</label>
+                      <label class="periority__item-label">
+                        <input
+                          type="radio"
+                          name="edit__priority"
+                          id="edit__priority-md"
+                          value="Medium"
+                        />
+                        <span class="custom__radio"></span>
+                        Medium
+                      </label>
                     </div>
                     <div class="details_periority-item">
-                      <input
-                        type="radio"
-                        name="add__priority"
-                        id="add__priority-low"
-                        value="low"
-                      />
-                      <label for="add__priority-low">Low</label>
+                      <label class="periority__item-label">
+                        <input
+                          type="radio"
+                          name="edit__priority"
+                          id="edit__priority-low"
+                          value="Low"
+                        />
+                        <span class="custom__radio"></span>
+                        Low
+                      </label>
                     </div>
                   </div>
                 </div>
+                
                 <div class="modal__details-status">
                   <label for="edit__status">Status</label>
                   <select class="modal___inputs" name="edit__status" id="edit__status">
-                    <option value="bug" disabled selected>Please select</option>
-                    <option value="bug">Bug</option>
-                    <option value="feature">Feature</option>
+                    <option disabled selected>Please select</option>
+                    <option value="Bug">Bug</option>
+                    <option value="Feature">Feature</option>
+                  </select>
+                </div>
+                <div class="modal__details-status">
+                  <label for="edit__status">State</label>
+                  <select class="modal___inputs" name="edit__state" id="edit__state">
+                    <option disabled selected>Please select</option>
+                    <option value="todo">To Do</option>
+                    <option value="going">Going</option>
+                    <option value="done">Done</option>
                   </select>
                 </div>
                 <div class="modal__details-date">
