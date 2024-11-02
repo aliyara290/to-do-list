@@ -1,12 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/main.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager</title>
-</head>
-<body>
-    <h1 class="header">Hello</h1>
-</body>
+    <meta
+      name="description"
+      content="A simple and efficient task manager app to organize, prioritize, and track tasks with ease. Stay productive with reminders, deadlines, and a clear task overview."
+    />
+    <link rel="stylesheet" href="./css/main.min.css" />
+    <script
+      src="https://kit.fontawesome.com/f01941449c.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="toggle__effect"></div>
+    <heaedr class="header_content">
+      <div class="header__logo">
+        <img src="../src/assets/images/logo/Untitled-1.svg" alt="logo" />
+      </div>
+      <div class="header__btns">
+        <ul class="header__btn-list">
+          <li class="header__btn-item" id="change__bg">
+            <i class="fa-solid fa-image"></i>
+          </li>
+          <li class="header__btn-item" id="switch-mode">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+          </li>
+        </ul>
+      </div>
+    </heaedr>
+    <main
+      class="main_content"
+      style="
+        background: url('../src/assets/images/bgs/bg-4.jpg');
+        background-position: bottom;
+        background-size: cover;
+      "
+    >
+      <section class="tasks">
+        <div class="task__row">
+          <div class="task__row_new">
+            <button type="button" id="new__task">Add Task</button>
+            <div class="task__modal" id="add__task-model--eff">
+              <header class="modal__header">
+                <div class="modal__header-heading">
+                  <h2>Add Task</h2>
+                </div>
+                <div class="modal__header-close" id="close__modal-btn">
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+              </header>
+              <div class="task__modal-details">
+                <form action="" id="modal__form">
+                  <div class="modal__details-title">
+                    <label for="add__title">Add title</label>
+                    <textarea
+                      name="add__title"
+                      id="add__title"
+                      placeholder="Add title"
+                      required
+                      class="modal___inputs"
+                    ></textarea>
+                  </div>
+                  <div class="modal__details-priority">
+                    <div class="priority__modal-title">
+                      <label>Periority</label>
+                    </div>
+                    <div class="modal__radios">
+                      <div class="details_periority-item">
+                        <label class="periority__item-label">
+                          <input
+                            type="radio"
+                            name="add__priority"
+                            id="add__priority-high"
+                            value="High"
+                            required
+                          />
+                          <span class="custom__radio"></span>
+                          High
+                        </label>
+                      </div>
+                      <div class="details_periority-item">
+                        <label class="periority__item-label">
+                          <input
+                            type="radio"
+                            name="add__priority"
+                            id="add__priority-md"
+                            value="Medium"
+                          />
+                          <span class="custom__radio"></span>
+                          Medium
+                        </label>
+                      </div>
+                      <div class="details_periority-item">
+                        <label class="periority__item-label">
+                          <input
+                            type="radio"
+                            name="add__priority"
+                            id="add__priority-low"
+                            value="Low"
+                          />
+                          <div class="custom__radio"></div>
+                          Low
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal__details-status">
+                    <label for="add__status">Status</label>
+                    <select class="modal___inputs" name="add__status" id="add__status">
+                      <option value="bug" disabled selected>Please select</option>
+                      <option value="Bug">Bug</option>
+                      <option value="Feature">Feature</option>
+                    </select>
+                  </div>
+                  <div class="modal__details-status">
+                    <label for="add__status">State</label>
+                    <select class="modal___inputs" name="add__state" id="add__state">
+                      <option disabled selected>Please select</option>
+                      <option value="todo">To Do</option>
+                      <option value="going">Going</option>
+                      <option value="done">Done</option>
+                    </select>
+                  </div>
+                  <div class="modal__details-date">
+                    <label for="add__date">Date</label>
+                    <input
+                      type="date"
+                      name="add__date"
+                      id="add__date"
+                      required
+                      class="modal___inputs"
+                    />
+                  </div>
+                  <div class="modal__details-description">
+                    <label for="add__description">Desicription</label>
+                    <textarea
+                      name="add__description"
+                      id="add__description"
+                      placeholder="Add description"
+                      required
+                      class="modal___inputs"
+                    ></textarea>
+                  </div>
+                  <div class="modal__details-bottom">
+                    <div class="modal__details-btn">
+                      <button type="submit">Save Changes</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="task__row task__grid">
+          <div class="task__row-col">
+            <div class="row__col-heading">
+              <h2>To do</h2>
+            </div>
+            <div class="row__col-cards" id="todo__cards-list">
+              <div class="col__card-message">
+                <p>No tasks added</p>
+              </div>
+            </div>
+          </div>
+          <div class="task__row-col">
+            <div class="row__col-heading">
+              <h2>Going</h2>
+            </div>
+            <div class="row__col-cards" id="going__cards-list">
+              <div class="col__card-message">
+                <p>No tasks added</p>
+              </div>
+            </div>
+          </div>
+          <div class="task__row-col">
+            <div class="row__col-heading">
+              <h2>Done</h2>
+            </div>
+            <div class="row__col-cards" id="done__cards-list">
+              <div class="col__card-message">
+                <p>No tasks added</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- this is edit task modal  -->
+
+          <div class="task__modal task__modal-fedit" id="edit__task-model--eff">
+            <header class="modal__header">
+              <div class="modal__header-heading">
+                <h2>edit Task</h2>
+              </div>
+              <div class="modal__header-close" id="close__edit-modal">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+            </header>
+            <div class="task__modal-details">
+              <form action="" id="edit__modal-form">
+                <div class="modal__details-title">
+                  <label for="edit__title">Add title</label>
+                  <textarea class="modal___inputs" placeholder="Add title" name="edit__title" id="edit__title"></textarea>
+                </div>
+                <div class="modal__details-priority">
+                  <div class="priority__modal-title">
+                    <label>Priority</label>
+                  </div>
+                  <div class="modal__radios">
+                    <div class="details_periority-item">
+                      <label class="periority__item-label">
+                        <input
+                          type="radio"
+                          name="edit__priority"
+                          id="edit__priority-high"
+                          value="High"
+                        />
+                        <span class="custom__radio"></span>
+                        High
+                      </label>
+                    </div>
+                    <div class="details_periority-item">
+                      <label class="periority__item-label">
+                        <input
+                          type="radio"
+                          name="edit__priority"
+                          id="edit__priority-md"
+                          value="Medium"
+                        />
+                        <span class="custom__radio"></span>
+                        Medium
+                      </label>
+                    </div>
+                    <div class="details_periority-item">
+                      <label class="periority__item-label">
+                        <input
+                          type="radio"
+                          name="edit__priority"
+                          id="edit__priority-low"
+                          value="Low"
+                        />
+                        <span class="custom__radio"></span>
+                        Low
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="modal__details-status">
+                  <label for="edit__status">Status</label>
+                  <select class="modal___inputs" name="edit__status" id="edit__status">
+                    <option disabled selected>Please select</option>
+                    <option value="Bug">Bug</option>
+                    <option value="Feature">Feature</option>
+                  </select>
+                </div>
+                <div class="modal__details-status">
+                  <label for="edit__status">State</label>
+                  <select class="modal___inputs" name="edit__state" id="edit__state">
+                    <option disabled selected>Please select</option>
+                    <option value="todo">To Do</option>
+                    <option value="going">Going</option>
+                    <option value="done">Done</option>
+                  </select>
+                </div>
+                <div class="modal__details-date">
+                  <label for="edit__date">Date</label>
+                  <input class="modal___inputs" type="date" name="edit__date" id="edit__date" />
+                </div>
+                <div class="modal__details-description">
+                  <label for="edit__description">Desicription</label>
+                  <textarea
+                    name="edit__description"
+                    id="edit__description"
+                    placeholder="Add description"
+                    class="modal___inputs"
+                  ></textarea>
+                </div>
+                <div class="modal__details-bottom">
+                  <div class="modal__details-btn">
+                    <button type="button" id="delete__task-btn">Delete</button>
+                  </div>
+                  <div class="modal__details-btn">
+                    <button type="submit">Save Changes</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../src/js/main.js"></script>
+  </body>
 </html>

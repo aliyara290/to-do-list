@@ -1,0 +1,78 @@
+/* Hide default radio button */
+.periority__item-label input[type="radio"] {
+  display: none;
+}
+
+/* Container for custom radio styling */
+.periority__item-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+/* Custom radio button appearance */
+.custom__radio {
+  height:   13px;
+  width: 13px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  position: relative;
+  transition: border 0.3s ease;
+}
+.modal__radios .details_periority-item:nth-child(1) .custom__radio{
+    background-color: $color-high;
+}
+.modal__radios .details_periority-item:nth-child(2) .custom__radio{
+    background-color: $color-medium;
+}
+.modal__radios .details_periority-item:nth-child(3) .custom__radio{
+    background-color: $color-low;
+}
+
+/* Circle inside when radio button is selected */
+.periority__item-label input[type="radio"]:checked + .custom__radio::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background-color: $color-primary;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.3s ease;
+}
+
+
+
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  background-image: none;
+  padding: 12px;
+  cursor: pointer;
+}
+::-webkit-scrollbar {
+width: 1px;
+}
+
+::-webkit-scrollbar-track {
+background: transparent;
+box-shadow: none;
+}
+::-webkit-scrollbar-thumb {
+background: $color-primary;
+
+border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #fff;
+}
+::-webkit-scrollbar-track-piece {
+border: none;
+}

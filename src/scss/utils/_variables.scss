@@ -1,29 +1,34 @@
-// Color Variables
 
+
+html {
+    font-size: 10px;
+  }
+  textarea {
+    resize: none;
+  }
 // Primary Colors
-$color-background: #F4F6F8;   // Main Background Color
-$color-primary: #007BFF;      // Primary Action Color
-$color-secondary: #6C757D;    // Secondary Action Color
+$color-background: #080909;
+$color-primary: #101214;
+$color-secondary: #1d2125;
+$color-transparent: #101214be;
 
 // Text Colors
-$color-text-primary: #212529;  // Primary Text Color
-$color-text-secondary: #495057; // Secondary Text Color
-$color-text-placeholder: #6C757D; // Placeholder Text Color
+$color-text-primary: #fff;
+$color-text-placeholder: #B6C2CF;
 
 // Status Colors
-$color-success: #28A745;       // Success Color
-$color-warning: #FFC107;       // Warning Color
-$color-danger: #DC3545;         // Error Color
+$color-high: #1569f1;
+$color-medium: #1cab06;
+$color-low: #c8b105;
+$color-danger: #f11515;
 
-// Accent Colors
-$color-info: #17A2B8;          // Info Color
-$color-light-accent: #E9ECEF;  // Light Accent Color
+$fz-xxs: 0.8rem;
+$fz-xs: 1rem;
+$fz-sm: 1.2rem;
+$fz-md: 1.5rem;
+$fz-lg: 2rem;
+$fz-xl: 2.4rem;
+$fz-xxl: 3.2rem;
+$fz-xxxl: 4.8rem;
 
-$fz-xxs: 0.8rem;    // 8px
-$fz-xs: 1rem;       // 10px
-$fz-sm: 1.2rem;     // 12px
-$fz-md: 1.6rem;     // 16px
-$fz-lg: 2rem;       // 20px
-$fz-xl: 2.4rem;     // 24px
-$fz-xxl: 3.2rem;    // 32px
-$fz-xxxl: 4.8rem;   // 48px
+
