@@ -66,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-
   changeBgFunc();
 
   let tasksList = [];
