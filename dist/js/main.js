@@ -1,3 +1,5 @@
+// import Swal from 'sweetalert2';
+
 document.addEventListener("DOMContentLoaded", () => {
   const addTask = document.querySelector("#new__task"); // Add task Button
   const closeModal = document.querySelector("#close__modal-btn"); // add modal close Icon
@@ -115,6 +117,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // clode the modal
     addTaskModal.classList.remove("active");
     toggleEffect.classList.remove("active");
+
+    Swal.fire({
+      title: "Task Added!",
+      text: `You have added a new task succefully`,
+      icon: "success",
+      confirmButtonText: "Nice!",
+    });
   });
 
   const editForm = document.querySelector("#edit__modal-form");
@@ -176,6 +185,8 @@ document.addEventListener("DOMContentLoaded", () => {
       toggleEffect.classList.remove("active");
       console.log(`Deleted task with ID: ${taskId}`);
       saveData();
+
+      Swal.fire("Deleted!", "Your task has been deleted.", "success");
     } else {
       console.log("Task not found:", taskId);
     }
@@ -200,6 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const taskItem = document.createElement("div");
       taskItem.className = "col-cards-card";
       taskItem.setAttribute("card-id", task.id);
+      taskItem.setAttribute("draggable", "true");
       taskItem.innerHTML = `
           <div class="colm__card--top">
               <div class="col__card-title">
@@ -240,19 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
           doneTasksList.appendChild(taskItem);
           break;
       }
-
-      // calcule children of elements
-
-      const todoLength = document.getElementById("todo__length");
-      const goingLength = document.getElementById("going__length");
-      const doneLength = document.getElementById("done__length");
-
-      todoLength.textContent = `(${todoTasksList.children.length})`;
-      goingLength.textContent = `(${goingTasksList.children.length})`;
-      doneLength.textContent = `(${doneTasksList.children.length})`;
-
-      // change the periority bg colors 
-
+      // change the periority bg colors
       const periorityColor = taskItem.querySelector(".col__card-priority");
       switch (task.taskPeriority) {
         case "High":
@@ -269,7 +269,51 @@ document.addEventListener("DOMContentLoaded", () => {
           break;
       }
 
+      // // calcule children of elements
+
+      // const todoLength = document.getElementById("todo__length");
+      // const goingLength = document.getElementById("going__length");
+      // const doneLength = document.getElementById("done__length");
+
+      // todoLength.textContent = `(${todoTasksList.children.length})`;
+      // goingLength.textContent = `(${goingTasksList.children.length})`;
+      // doneLength.textContent = `(${doneTasksList.children.length})`;
+
       taskItem.addEventListener("click", () => editTask(task.id));
     });
   }
+  // drag and drop
+  const allTasksCards = document.querySelectorAll(".col-cards-card");
+  const allTasksBoxes = document.querySelectorAll(".row__col-cards");
+  // Add drag start and end event listeners to each task card
+  allTasksCards.forEach((task) => {
+    task.addEventListener("dragstart", () => {
+      task.classList.add("isDragging");
+    });
+    task.addEventListener("dragend", () => {
+      task.classList.remove("isDragging");
+    });
+  });
+
+  // Add dragover event listener to each box
+  allTasksBoxes.forEach((box) => {
+    box.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      const draggingTask = document.querySelector(".isDragging");
+      if (draggingTask) {
+        box.appendChild(draggingTask);
+  
+        // Update taskState based on the new box category
+        const taskId = draggingTask.getAttribute("card-id");
+        const newState = box.id.replace("__cards-list", ""); // e.g., "todo", "going", "done"
+        const task = tasksList.find((task) => task.id === taskId);
+  
+        if (task) {
+          task.taskState = newState; // Update the task's state
+          saveData(); // Save the updated tasksList to localStorage
+        }
+      }
+    });
+  });
+  
 });
