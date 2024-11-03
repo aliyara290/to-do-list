@@ -269,22 +269,13 @@ document.addEventListener("DOMContentLoaded", () => {
           break;
       }
 
-      // // calcule children of elements
-
-      // const todoLength = document.getElementById("todo__length");
-      // const goingLength = document.getElementById("going__length");
-      // const doneLength = document.getElementById("done__length");
-
-      // todoLength.textContent = `(${todoTasksList.children.length})`;
-      // goingLength.textContent = `(${goingTasksList.children.length})`;
-      // doneLength.textContent = `(${doneTasksList.children.length})`;
-
       taskItem.addEventListener("click", () => editTask(task.id));
     });
   }
   // drag and drop
   const allTasksCards = document.querySelectorAll(".col-cards-card");
   const allTasksBoxes = document.querySelectorAll(".row__col-cards");
+
   // Add drag start and end event listeners to each task card
   allTasksCards.forEach((task) => {
     task.addEventListener("dragstart", () => {
@@ -303,14 +294,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (draggingTask) {
         box.appendChild(draggingTask);
   
-        // Update taskState based on the new box category
         const taskId = draggingTask.getAttribute("card-id");
-        const newState = box.id.replace("__cards-list", ""); // e.g., "todo", "going", "done"
+        const newState = box.id.replace("__cards-list", "");
         const task = tasksList.find((task) => task.id === taskId);
   
         if (task) {
-          task.taskState = newState; // Update the task's state
-          saveData(); // Save the updated tasksList to localStorage
+          task.taskState = newState;
+          saveData(); 
         }
       }
     });
