@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function saveData() {
     localStorage.setItem("tasks", JSON.stringify(tasksList));
   }
+  
   function getData() {
     const storedTasks = localStorage.getItem("tasks");
     if (storedTasks) {
@@ -273,8 +274,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   // drag and drop
-  const allTasksCards = document.querySelectorAll(".col-cards-card");
   const allTasksBoxes = document.querySelectorAll(".row__col-cards");
+  const allTasksCards = document.querySelectorAll(".col-cards-card");
 
   // Add drag start and end event listeners to each task card
   allTasksCards.forEach((task) => {

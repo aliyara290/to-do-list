@@ -79,30 +79,19 @@ background: #fff;
 border: none;
 }
 
-
-
-
+// make custom input date icon 
 
 
 input[type="date"] {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f0f8ff; /* Custom background color */
-  color: #333;
   position: relative;
 }
 
-/* Adding a calendar icon inside the input field */
 input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute;
   right: 10px;
-  color: #666;
   cursor: pointer;
 }
 
-/* Optional: Add an icon background */
 input[type="date"]::-webkit-calendar-picker-indicator {
   background-image: url('../../../dist/assets/bgs/calendar.png'); /* Replace with your icon */
   background-size: 16px;
