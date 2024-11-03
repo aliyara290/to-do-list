@@ -32,11 +32,13 @@
 }
 
 /* Circle inside when radio button is selected */
+
 .periority__item-label input[type="radio"]:checked + .custom__radio::after {
   content: "";
   width: 9px;
   height: 9px;
-  background-color: $color-primary;
+  background-color: $color-text-primary;
+  border: 0.5px solid $color-primary;
   border-radius: 50%;
   position: absolute;
   top: 50%;

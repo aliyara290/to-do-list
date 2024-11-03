@@ -27,7 +27,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: #101010ac;
-  z-index: 900;
+  z-index: 90;
   display: none;
 }
 .header_content {
@@ -41,16 +41,110 @@ body {
   align-items: center;
   justify-content: space-between;
   z-index: 100;
-  .header__logo img {
-    width: 19rem;
+  .header__logo {
+    margin: auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    img {
+      width: 15rem;
+    margin: auto 0;
+
+    }
   }
   .header__btn-list {
     display: flex;
     align-items: center;
     gap: 3rem;
-    li i {
-      font-size: $fz-xl;
-      color: $color-text-primary;
+    li {
+      cursor: pointer;
+      i {
+        font-size: $fz-xl;
+        color: $color-text-placeholder;
+      }
+      &:hover {
+        i {
+          color: $color-text-primary;
+        }
+      }
+    } 
+  }
+  .header__backgrounds.active {
+    right: 0;
+  }
+  .header__backgrounds {
+    position: absolute;
+    right: -100%;
+    top: 100%;
+    background-color: $color-primary;
+    width: 50rem;
+    height: calc(100svh - 7rem);
+    box-shadow: -10px 0 10px #10121465;
+    padding: 3rem 2rem;
+    padding-top: 0;
+    overflow-y: auto;
+    transition: right .4s ease;
+    z-index: 1200;
+   
+    .header__backgrounds-heading {
+      position: sticky;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      padding-top: 3rem;
+      background-color: $color-primary;
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      align-items: center;
+      padding-bottom: 3rem;
+      .bg__heading-return {
+        grid-column: span 1 / span 1;
+        cursor: pointer;
+        i {
+          font-size: $fz-lg;
+          color: $color-text-placeholder;
+          &:hover {
+            color: $color-text-primary;
+          }
+        }
+      }
+      .bg__heading-title {
+        grid-column: span 9 / span 9;
+        h3 {
+          font-size: $fz-lg;
+          font-weight: 500;
+          color: $color-text-placeholder;
+          text-transform: capitalize;
+        }
+      }
+    }
+    .header__backgrounds-pics {
+      .pics__list {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 1rem;
+        li{
+          width: 100%;
+          height: 100%;
+          height: 15rem;
+          background-color: $color-secondary;
+          border-radius: 1rem;
+          overflow: hidden;
+          cursor: pointer;
+          position: relative;
+          
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            &:hover {
+            filter: brightness(0.4);
+          }
+          }
+        }
+      }
     }
   }
 }
@@ -61,6 +155,9 @@ body {
   width: 100%;
   height: 100vh;
   padding: 11rem 4% 3rem;
+  background: url("/dist/assets/bgs/bg-2.jpg");
+  background-position: top;
+  background-size: cover;
   position: relative;
 }
 .main_content:before {
@@ -70,7 +167,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, #0000007c, #0000007c);
+  background: linear-gradient(to bottom, #0000008e, #0000008e);
 }
 .main_content .tasks {
   display: grid;
@@ -95,13 +192,20 @@ body {
   border-radius: 1.5rem;
   color: $color-text-primary;
   font-size: $fz-md;
-  font-weight: 500;
+  font-weight: 500; 
   border: none;
   outline: none;
   cursor: pointer;
+  i {
+    transition: transform .4s ease-in-out;
+  }
   &:hover {
     background-color: $color-secondary;
+    i {
+      transform: rotate(180deg);
+    }
   }
+
 }
 
 // task modal
@@ -268,6 +372,8 @@ body {
     }
   }
 }
+
+
 // this is cards styles
 .task__grid {
   width: 100%;
@@ -279,6 +385,8 @@ body {
     background-color: $color-primary;
     padding: 2.5rem 2rem;
     border-radius: 1.5rem;
+    box-shadow: 0 0   20px 5px #18171c68;
+
     .row__col-heading {
       margin-bottom: 2.5rem;
       h2 {

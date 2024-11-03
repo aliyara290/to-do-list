@@ -1,10 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const addTask = document.querySelector("#new__task");
-  const closeModal = document.querySelector("#close__modal-btn");
-  const closeEditModal = document.querySelector("#close__edit-modal");
-  const addTaskModal = document.querySelector("#add__task-model--eff");
-  const editTaskModal = document.querySelector("#edit__task-model--eff");
-  const toggleEffect = document.querySelector(".toggle__effect");
+  const addTask = document.querySelector("#new__task"); // Add task Button
+  const closeModal = document.querySelector("#close__modal-btn"); // add modal close Icon
+  const closeEditModal = document.querySelector("#close__edit-modal"); // edit modal close icon
+  const addTaskModal = document.querySelector("#add__task-model--eff"); // add modal
+  const editTaskModal = document.querySelector("#edit__task-model--eff"); // edit modal
+  const toggleEffect = document.querySelector(".toggle__effect"); // overlay effect
+
+  const changeBgIcon = document.querySelector("#change__bg");
+  const closeBgIcon = document.querySelector("#close__bg-icon");
+  const changeBgContent = document.querySelector(".header__backgrounds");
 
   addTask.addEventListener("click", () => {
     addTaskModal.classList.add("active");
@@ -20,6 +24,48 @@ document.addEventListener("DOMContentLoaded", () => {
     editTaskModal.classList.remove("active");
     toggleEffect.classList.remove("active");
   });
+
+  // change background Icon Toggle
+
+  changeBgIcon.addEventListener("click", () => {
+    changeBgContent.classList.add("active");
+    toggleEffect.classList.add("active");
+  });
+  closeBgIcon.addEventListener("click", () => {
+    changeBgContent.classList.remove("active");
+    toggleEffect.classList.remove("active");
+  });
+
+  function changeBgFunc() {
+    const mainBackground = document.querySelector(".main_content");
+    const bgImages = document.querySelectorAll(".pics__list-item img");
+
+    // get the saved bg
+    const savedBg = localStorage.getItem("backgroundImage");
+    if (savedBg) {
+      mainBackground.style.backgroundImage = `url('${savedBg}')`;
+      mainBackground.style.backgroundSize = "cover";
+      mainBackground.style.backgroundPosition = "top";
+    }
+
+    bgImages.forEach((img) => {
+      img.addEventListener("click", () => {
+        const bgUrl = img.getAttribute("src");
+        mainBackground.style.backgroundImage = `url('${bgUrl}')`;
+        mainBackground.style.backgroundSize = "cover";
+        mainBackground.style.backgroundPosition = "top";
+
+        // Save the selected background to local storage
+        localStorage.setItem("backgroundImage", bgUrl);
+
+        // close the menuu
+        changeBgContent.classList.remove("active");
+        toggleEffect.classList.remove("active");
+      });
+    });
+  }
+
+  changeBgFunc();
 
   let tasksList = [];
   let taskToEdit = null;
@@ -37,17 +83,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   getData();
 
-
   const form = document.querySelector("#modal__form");
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const taskTitle = document.querySelector("#add__title").value.trim();
-    const taskPeriority = document.querySelector("input[name='add__priority']:checked").value;
+    const taskPeriority = document.querySelector(
+      "input[name='add__priority']:checked"
+    ).value;
     const taskStatus = document.querySelector("#add__status").value;
     const taskState = document.querySelector("#add__state").value;
     const taskDate = document.querySelector("#add__date").value;
-    const taskDecription = document.querySelector("#add__description").value.trim();
+    const taskDecription = document
+      .querySelector("#add__description")
+      .value.trim();
 
     const newTask = {
       id: Date.now().toString(),
@@ -61,7 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
     tasksList.push(newTask);
     renderTasks();
     form.reset();
-    saveData()
+    saveData();
+
+    // clode the modal
     addTaskModal.classList.remove("active");
     toggleEffect.classList.remove("active");
   });
@@ -71,19 +122,25 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     if (taskToEdit) {
-      taskToEdit.taskTitle = document.querySelector("#edit__title").value.trim();
-      taskToEdit.taskPeriority = document.querySelector("input[name='edit__priority']:checked").value;
+      taskToEdit.taskTitle = document
+        .querySelector("#edit__title")
+        .value.trim();
+      taskToEdit.taskPeriority = document.querySelector(
+        "input[name='edit__priority']:checked"
+      ).value;
       taskToEdit.taskStatus = document.querySelector("#edit__status").value;
       taskToEdit.taskState = document.querySelector("#edit__state").value;
       taskToEdit.taskDate = document.querySelector("#edit__date").value;
-      taskToEdit.taskDecription = document.querySelector("#edit__description").value.trim();
+      taskToEdit.taskDecription = document
+        .querySelector("#edit__description")
+        .value.trim();
 
       renderTasks();
 
       editTaskModal.classList.remove("active");
       toggleEffect.classList.remove("active");
 
-      saveData()
+      saveData();
     }
   });
 
@@ -92,29 +149,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (taskToEdit) {
       document.querySelector("#edit__title").value = taskToEdit.taskTitle;
-      document.querySelector("input[name='edit__priority'][value='" + taskToEdit.taskPeriority + "']").checked = true;
+      document.querySelector(
+        "input[name='edit__priority'][value='" + taskToEdit.taskPeriority + "']"
+      ).checked = true;
       document.querySelector("#edit__status").value = taskToEdit.taskStatus;
       document.querySelector("#edit__state").value = taskToEdit.taskState;
       document.querySelector("#edit__date").value = taskToEdit.taskDate;
-      document.querySelector("#edit__description").value = taskToEdit.taskDecription;
+      document.querySelector("#edit__description").value =
+        taskToEdit.taskDecription;
 
       editTaskModal.classList.add("active");
       toggleEffect.classList.add("active");
 
-      saveData()
+      saveData();
     } else {
       console.log("No task found:", taskId);
     }
   }
 
   function deleteTask(taskId) {
-    const taskIndex = tasksList.findIndex(task => task.id === taskId);
+    const taskIndex = tasksList.findIndex((task) => task.id === taskId);
     if (taskIndex !== -1) {
       tasksList.splice(taskIndex, 1);
       renderTasks();
       editTaskModal.classList.remove("active");
       toggleEffect.classList.remove("active");
       console.log(`Deleted task with ID: ${taskId}`);
+      saveData();
     } else {
       console.log("Task not found:", taskId);
     }
@@ -168,7 +229,6 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `;
 
-        
       switch (task.taskState) {
         case "todo":
           todoTasksList.appendChild(taskItem);
@@ -180,6 +240,18 @@ document.addEventListener("DOMContentLoaded", () => {
           doneTasksList.appendChild(taskItem);
           break;
       }
+
+      // calcule children of elements
+
+      const todoLength = document.getElementById("todo__length");
+      const goingLength = document.getElementById("going__length");
+      const doneLength = document.getElementById("done__length");
+
+      todoLength.textContent = `(${todoTasksList.children.length})`;
+      goingLength.textContent = `(${goingTasksList.children.length})`;
+      doneLength.textContent = `(${doneTasksList.children.length})`;
+
+      // change the periority bg colors 
 
       const periorityColor = taskItem.querySelector(".col__card-priority");
       switch (task.taskPeriority) {
