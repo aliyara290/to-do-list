@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function changeBgFunc() {
-    const mainBackground = document.querySelector(".main_content");
+    const mainBackground = document.querySelector(".background__pics");
     const bgImages = document.querySelectorAll(".pics__list-item img");
 
     // get the saved bg
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function saveData() {
     localStorage.setItem("tasks", JSON.stringify(tasksList));
   }
-  
+
   function getData() {
     const storedTasks = localStorage.getItem("tasks");
     if (storedTasks) {

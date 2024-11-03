@@ -155,6 +155,18 @@ body {
   }
 }
 
+
+// background image section
+
+.background__pics {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+}
+
 // main content
 
 .main_content {
