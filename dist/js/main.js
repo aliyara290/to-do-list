@@ -199,14 +199,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+
+  // calcule the col tasks numbers 
+
+  function updateCounters() {
+    
+    const todoTasksList = document.querySelector("#todo__cards-list");
+    const goingTasksList = document.querySelector("#going__cards-list");
+    const doneTasksList = document.querySelector("#done__cards-list");
+
+    const todoLength = document.querySelector("#todo__length");
+    const goingLength = document.querySelector("#going__length");
+    const doneLength = document.querySelector("#done__length");
+
+    todoLength.textContent = `(${todoTasksList.children.length})`;
+    goingLength.textContent = `(${goingTasksList.children.length})`;
+    doneLength.textContent = `(${doneTasksList.children.length})`;
+  }
+
   function renderTasks() {
-    const todoTasksList = document.getElementById("todo__cards-list");
-    const goingTasksList = document.getElementById("going__cards-list");
-    const doneTasksList = document.getElementById("done__cards-list");
+    
+    let todoTasksList = document.querySelector("#todo__cards-list");
+    let goingTasksList = document.querySelector("#going__cards-list");
+    let doneTasksList = document.querySelector("#done__cards-list");
     todoTasksList.innerHTML = "";
     goingTasksList.innerHTML = "";
     doneTasksList.innerHTML = "";
-
     tasksList.forEach((task) => {
       const taskItem = document.createElement("div");
       taskItem.className = "col-cards-card";
@@ -269,15 +287,18 @@ document.addEventListener("DOMContentLoaded", () => {
           break;
       }
 
+      //  get the id of this task
       taskItem.addEventListener("click", () => editTask(task.id));
+
+      updateCounters()
     });
   }
   // drag and drop
-  const allTasksBoxes = document.querySelectorAll(".row__col-cards");
-  const allTasksCards = document.querySelectorAll(".col-cards-card");
+  const tasksParent = document.querySelectorAll(".row__col-cards");
+  const tasksChild = document.querySelectorAll(".col-cards-card");
 
   // Add drag start and end event listeners to each task card
-  allTasksCards.forEach((task) => {
+  tasksChild.forEach((task) => {
     task.addEventListener("dragstart", () => {
       task.classList.add("isDragging");
     });
@@ -286,24 +307,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Add dragover event listener to each box
-  allTasksBoxes.forEach((box) => {
-    box.addEventListener("dragover", (e) => {
+  // Add dragover event listener to each parent
+  tasksParent.forEach((parent) => {
+    parent.addEventListener("dragover", (e) => {
       e.preventDefault();
       const draggingTask = document.querySelector(".isDragging");
       if (draggingTask) {
-        box.appendChild(draggingTask);
-  
+        parent.appendChild(draggingTask);
+
         const taskId = draggingTask.getAttribute("card-id");
-        const newState = box.id.replace("__cards-list", "");
+        const newState = parent.id.replace("__cards-list", "");
         const task = tasksList.find((task) => task.id === taskId);
-  
+        
         if (task) {
           task.taskState = newState;
-          saveData(); 
+          saveData();
         }
+        updateCounters()
       }
     });
+    // renderTasks();
   });
-  
+
+
+ 
+
 });
