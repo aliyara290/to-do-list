@@ -119,10 +119,13 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleEffect.classList.remove("active");
 
     Swal.fire({
-      title: "Task Added!",
-      text: `You have added a new task succefully`,
+      title: "Success!",
+      text: "Item has been successfully added.",
       icon: "success",
-      confirmButtonText: "Nice!",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#1569f1",
+      background: "#101214", // Dark background for dark mode
+      color: "#fff", // White text color for dark mode
     });
   });
 
@@ -178,18 +181,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function deleteTask(taskId) {
     const taskIndex = tasksList.findIndex((task) => task.id === taskId);
-    if (taskIndex !== -1) {
-      tasksList.splice(taskIndex, 1);
-      renderTasks();
-      editTaskModal.classList.remove("active");
-      toggleEffect.classList.remove("active");
-      console.log(`Deleted task with ID: ${taskId}`);
-      saveData();
 
-      Swal.fire("Deleted!", "Your task has been deleted.", "success");
-    } else {
-      console.log("Task not found:", taskId);
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#f11515",
+      cancelButtonColor: "#1569f1",
+      confirmButtonText: "Yes, delete it!",
+      background: "#101214", // Dark background for dark mode
+      color: "#fff",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (taskIndex !== -1) {
+          tasksList.splice(taskIndex, 1);
+          renderTasks();
+          editTaskModal.classList.remove("active");
+          toggleEffect.classList.remove("active");
+          console.log(`Deleted task with ID: ${taskId}`);
+        } else {
+          console.log("Task not found:", taskId);
+        }
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Item has been successfully deleted.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#1569f1',
+          background: '#101214',
+          color: '#fff'
+        });
+        
+      }
+      saveData();
+      updateCounters();
+    });
   }
 
   // Event listener for the delete button in the edit modal
@@ -199,11 +226,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-
-  // calcule the col tasks numbers 
+  // calcule the col tasks numbers
 
   function updateCounters() {
-    
     const todoTasksList = document.querySelector("#todo__cards-list");
     const goingTasksList = document.querySelector("#going__cards-list");
     const doneTasksList = document.querySelector("#done__cards-list");
@@ -218,7 +243,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderTasks() {
-    
     let todoTasksList = document.querySelector("#todo__cards-list");
     let goingTasksList = document.querySelector("#going__cards-list");
     let doneTasksList = document.querySelector("#done__cards-list");
@@ -290,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
       //  get the id of this task
       taskItem.addEventListener("click", () => editTask(task.id));
 
-      updateCounters()
+      updateCounters();
     });
   }
   // drag and drop
@@ -318,18 +342,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const taskId = draggingTask.getAttribute("card-id");
         const newState = parent.id.replace("__cards-list", "");
         const task = tasksList.find((task) => task.id === taskId);
-        
+
         if (task) {
           task.taskState = newState;
           saveData();
         }
-        updateCounters()
+        updateCounters();
       }
     });
-    // renderTasks();
   });
-
-
- 
-
 });
