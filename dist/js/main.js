@@ -1,5 +1,3 @@
-// import Swal from 'sweetalert2';
-
 document.addEventListener("DOMContentLoaded", () => {
   const addTask = document.querySelector("#new__task"); // Add task Button
   const closeModal = document.querySelector("#close__modal-btn"); // add modal close Icon
@@ -204,15 +202,14 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log("Task not found:", taskId);
         }
         Swal.fire({
-          title: 'Deleted!',
-          text: 'Item has been successfully deleted.',
-          icon: 'success',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#1569f1',
-          background: '#101214',
-          color: '#fff'
+          title: "Deleted!",
+          text: "Item has been successfully deleted.",
+          icon: "success",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#3085d6",
+          background: "#101214",
+          color: "#fff",
         });
-        
       }
       saveData();
       updateCounters();
@@ -254,10 +251,20 @@ document.addEventListener("DOMContentLoaded", () => {
       taskItem.className = "col-cards-card";
       taskItem.setAttribute("card-id", task.id);
       taskItem.setAttribute("draggable", "true");
+
+      let subTitle =
+        task.taskTitle.length > 40
+          ? task.taskTitle.substring(0, 40) + " ..."
+          : task.taskTitle;
+
+      let subDescription = task.taskDecription.length > 80
+      ? task.taskDecription.substring(0, 100) + " ..."
+      : task.taskDecription;
+
       taskItem.innerHTML = `
           <div class="colm__card--top">
               <div class="col__card-title">
-                  <h3>${task.taskTitle}</h3>
+                  <h3>${subTitle}</h3>
               </div>
               <div class="col__card-edit">
                   <i class="fa-solid fa-pen"></i>
@@ -265,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="colm__card--middle">
               <div class="col__card-description">
-                  <p>${task.taskDecription}</p>
+                  <p>${subDescription}</p>
               </div>
           </div>
           <div class="colm__card-bottom">
@@ -317,6 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCounters();
     });
   }
+
   // drag and drop
   const tasksParent = document.querySelectorAll(".row__col-cards");
   const tasksChild = document.querySelectorAll(".col-cards-card");
